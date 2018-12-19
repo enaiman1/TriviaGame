@@ -10,6 +10,7 @@ var arrayFinder = 0;
 
 // create question.
 //each question is an object that includes an array
+
 var question01 = {
     question: "Which country is known as the Pearl of Africa?",
     answers: ["Ethopia", "Morocco", "Uganda", "Tanazania"],
@@ -18,27 +19,24 @@ var question01 = {
     image: "./assets/images/uganda.jpg"
 };
 
-console.log(question01)
-
 var question02 = {
     question: "A couple celebrating their crystal wedding anniversary have been married for how many years?",
     answers: ["Ten (10)", "Fifteen(15)", "Twenty(20)", "Fifty(50)"],
     value: ["incorrect", "correct", "incorrect", "incorrect"],
     correct: "Fifteen(15)",
-    image: "./assets/images/alien.png"
-};
-
-
-var question03 = {
-    question: " In which 1979 film was the spaceship called Nostromo?",
-    answers: ["Alien", "Star Wars", "Black Hole", "Preditor"],
-    value: ["correct", "incorrect", "incorrect", "incorrect"],
-    correct: "Alien",
     image: "./assets/images/crystal.jpg"
 };
 
+var question03 = {
+    question: "In which 1979 film was the spaceship called Nostromo?",
+    answers: ["Alien", "Star Wars", "Black Hole", "Preditor"],
+    value: ["correct", "incorrect", "incorrect", "incorrect"],
+    correct: "Alien",
+    image: "./assets/images/alien.png"
+};
+
 var question04 = {
-    question: "Who was once known as the King of Soul, and now as the Godfather of Soul?",
+    question: "Who was once known as the King of Soul, and now known as the Godfather of Soul?",
     answers: ["BB King", "Micheal Jackson", "Artist formally known as Prince", "James Brown"],
     value: ["incorrect", "incorrect", "incorrect", "correct"],
     correct: "James Brown",
@@ -67,28 +65,28 @@ var question07 = {
     answers: ["McDonalds", "Starbucks", "Zaxby", "Krispy Kreme"],
     value: ["incorrect", "correct", "incorrect", "incorrect"],
     correct: "Starbucks",
-    image: "./assets/images/starbucks.jpg"
+    image: "./assets/images/starbucks.jpeg"
 };
 
 var question08 = {
-    question: "Which US restaurants chain is named after the first mate in Moby Dick?",
-    answers: ["McDonalds", "Starbucks", "Zaxby", "Krispy Kreme"],
-    value: ["incorrect", "correct", "incorrect", "incorrect"],
-    correct: "Starbucks",
-    image: "./assets/images/starbucks.jpg"
+    question: "which mens tennis player has won the highest number of grand slams?",
+    answers: ["Rafael Nadal", "Pete Sampras", "Roger Federer", "Novak Djokovic"],
+    value: ["incorrect", "incorrect", "correct", "incorrect"],
+    correct: "Roger Federer",
+    image: "./assets/images/roger.jpeg"
 };
 
 
 var question09 = {
     question: "How many dots are on two dice??",
-    answers: ["Fourty two (42)", "Fourty eight(48)", "thirty eight (38)", "fift(50)"],
+    answers: ["Fourty two (42)", "Fourty eight(48)", "thirty eight (38)", "fifty(50)"],
     value: ["correct", "incorrect", "incorrect", "incorrect"],
     correct: "Fourty two (42)",
-    image: "./assets/images/dice.jpg"
+    image: "./assets/images/dice.jpeg"
 };
-// create new question 10
+
 var question10 = {
-    question: "What colour is a Himalayan poppy?",
+    question: "What color is a Himalayan poppy?",
     answers: ["yellow", "red", "pink", "blue"],
     value: ["incorrect", "incorrect", "incorrect", "correct"],
     correct: "Blue",
@@ -105,7 +103,7 @@ function start() {
     $(".content-div").empty();  //going in to the div that id is content div
     var startButton = $("<button>"); //creates a variable and connect it to a button
     startButton.text("Start");
-    startButton.addClass("start btn btn-default answerBtn"); //add boot strap class to give the look of the button
+    startButton.addClass("start btn btn-default answerBtn"); //add bootstrap class to give the look of the button
     $(".content-div").append(startButton); //puts start button
 };
 
@@ -116,17 +114,17 @@ function run() {
 
 function decrement() {
     time--;
-    $(".timer-div").html("Time Remaining: " + " Seconds");
+    $(".timer-div").html("Time Remaining: " + time + " Seconds");
     if (time == 0) {
         if (arrayFinder < questionArray.length - 1) {
-            setTimeout(function () { questionWrite(questionArray[arrayFinder]) }, 2000);
+            setTimeout(function () { questionWrite(questionArray[arrayFinder])}, 2000);
             solutionWrite(questionArray[arrayFinder]);
             $(".question-div").html("Incorrect!");
             stop();
             unanswered++;
         }
         else if (arrayFinder < questionArray.length) {
-            setTimeout(function () { endWrite(questionArray[arrayFinder]) }, 2000);
+            setTimeout(function () {endWrite(questionArray[arrayFinder])}, 2000);
             solutionWrite(questionArray[arrayFinder]);
             $(".question-div").html("Incorrect!");
             stop();
@@ -148,9 +146,9 @@ function questionWrite(obj) {
     run();
     $(".question-div").html(obj.question);
     for (var i = 0; i < obj.answers.length; i++) {
-        var answerButton = $("<button>")
+        var answerButton = $("<button>");
         answerButton.addClass("answer btn btn-default answerBtn");
-        answerButton.text(obj.answer[i]);
+        answerButton.text(obj.answers[i]);
         answerButton.attr("value", obj.value[i]);
         $(".content-div").append(answerButton);
         $(".content-div").append("<br>");
@@ -176,10 +174,10 @@ function startWrite () {
 
 function answerSelect() {
     stop();
-    if ($(this).attr("value") === "correct") {
+    if ($(this).attr("value") == "correct") {
         solutionWrite(questionArray[arrayFinder]);
         $(".question-div").html("Correct!");
-        corrrect++;
+        correct++;
         if (arrayFinder < questionArray.length) {
             setTimeout(function () {questionWrite(questionArray[arrayFinder])}, 2000);
         }
@@ -192,7 +190,7 @@ function answerSelect() {
         $(".question-div").html("Incorrect");
         incorrect++;
         if (arrayFinder < questionArray.length) {
-            setTimeout(function() {questionWrite(questionsArray[arrayFinder])}, 2000);
+            setTimeout(function() {questionWrite(questionArray[arrayFinder])}, 2000);
         }
         else if (arrayFinder < questionArray.length+1) {
             setTimeout (function () {endWrite(questionArray[arrayFinder])}, 2000);
@@ -216,7 +214,7 @@ function answerSelect() {
         incorrect = 0;
         correct = 0;
         unanswered = 0;
-        startWrite
+        startWrite()
     }
 
     $(document).on("click", ".start", startWrite);
