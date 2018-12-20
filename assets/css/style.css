@@ -6,28 +6,50 @@ body{
 }
 
 .background {
-    background: rgb(245, 208, 165, .8);
-    /* padding: 20px 0px 20px 0px; */
+   background: rgb(245, 208, 165, .8);
+   margin-top: 20px;
+    padding: 20px 0px 20px 0px;
+    opacity: .9;
+    border-radius: 20px;
+    border: rgb(12, 122, 40);
+    border-style: ridge;
 
 }
 
 h1{
     font-family: 'Irish Grover', cursive;
-    color: rgb(20,52,28);
+    color: rgb(12, 122, 40);
     font-size: 65px;
 }
 
+.timer-div{
+    margin-bottom: 10px;
+    width: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    text-align: center;
+    background:  rgb(12, 122, 40);
+    color: gold;
+    border: black solid 2px;
+    border-radius: 5px
+}
+
 .page-text {
-    font-size: 25px;
+    font-size: 20px;
     margin-bottom: 10px;
 }
 
 .answerBtn {
     margin-bottom: 10px;
-    width: 80%;
+    width: 30%;
     font-size: 20px;
-    background: none;
-    border: none;
+    background:  rgb(12, 122, 40);
+    color: gold;
+    border: black solid 2px;
+    border-radius: 15px;
+    
 }
 
 .character {

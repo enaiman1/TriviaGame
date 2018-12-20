@@ -93,54 +93,56 @@ var question10 = {
     image: "./assets/images/poppy.jpg"
 };
 
-// create new array that will all of the questions
+// create new array that will take in all of the questions
 
 var questionArray = [question01, question02, question03, question04, question05, question06, question07, question08, question09, question10];
 
 // create Functions 
 // this creates a start button
 function start() {
-    $(".content-div").empty();  //going in to the div that id is content div
+    $(".content-div").empty();  //going in to the div 
     var startButton = $("<button>"); //creates a variable and connect it to a button
-    startButton.text("Start");
-    startButton.addClass("start btn btn-default answerBtn"); //add bootstrap class to give the look of the button
+    startButton.text("Start"); //make button visiable on the document
+    startButton.addClass("start answerBtn"); //add bootstrap class to give the look of the button
     $(".content-div").append(startButton); //puts start button
 };
 
-//once button it click the count will go down by 1 sec
+//once button it click, program will start running within 1 second
 function run() {
     intervalId = setInterval(decrement, 1000);
 };
 
+// when question is revealed, timer starts (20 sec)
 function decrement() {
     time--;
-    $(".timer-div").html("Time Remaining: " + time + " Seconds");
-    if (time == 0) {
-        if (arrayFinder < questionArray.length - 1) {
+    $(".timer-div").text("Time Remaining: " + time + " Seconds");
+    if (time == 0) { //when time goes to zero
+        if (arrayFinder < questionArray.length - 1) { //take away question from array
             setTimeout(function () { questionWrite(questionArray[arrayFinder])}, 2000);
             solutionWrite(questionArray[arrayFinder]);
-            $(".question-div").html("Incorrect!");
+            $(".question-div").html("Incorrect!"); //display incorrect for 2 second 
             stop();
-            unanswered++;
+            unanswered++; // add a point to the unaswered column
         }
         else if (arrayFinder < questionArray.length) {
             setTimeout(function () {endWrite(questionArray[arrayFinder])}, 2000);
             solutionWrite(questionArray[arrayFinder]);
-            $(".question-div").html("Incorrect!");
+            $(".question-div").html("Incorrect!");  //display incorrect
             stop();
-            unanswered++;
+            unanswered++; // add a point to the unaswered column
         }
     };
 };
-
+// stop and reset the time interval
 function stop() {
     clearInterval(intervalId);
 };
 
+// displays the question
 function questionWrite(obj) {
     time = 20;
-    $(".timer-div").empty();
-    $(".timer-div").html("Time Remaining: " + time + " Seconds");
+    // $(".timer-div").empty();
+    // $(".timer-div").text("Time Remaining: " + time + " Seconds");
     $(".question-div").empty();
     $(".content-div").empty();
     run();
@@ -154,14 +156,14 @@ function questionWrite(obj) {
         $(".content-div").append("<br>");
     };
 };
-
+// displays answers from the array
 function solutionWrite(obj) {
     $(".question-div").empty();
     $(".content-div").empty();
     $(".content-div").html("The correct question was " + obj.correct + "<br>");
     var gameImage = $("<img>");
-    gameImage.attr("height", "250");
-    gameImage.attr("src", obj.image);
+    gameImage.attr("height", "250"); //shows image in the object
+    gameImage.attr("src", obj.image); 
     gameImage.addClass("picture")
     $(".content-div").append(gameImage);
     arrayFinder++;
@@ -171,13 +173,13 @@ function startWrite () {
     questionWrite(question01);   
 };
 
-
+// lets you select an answer
 function answerSelect() {
     stop();
-    if ($(this).attr("value") == "correct") {
+    if ($(this).attr("value") == "correct") {  //if you select the right answer
         solutionWrite(questionArray[arrayFinder]);
-        $(".question-div").html("Correct!");
-        correct++;
+        $(".question-div").html("Correct!"); // text is adds and will display correct
+        correct++; //correct column adds a point
         if (arrayFinder < questionArray.length) {
             setTimeout(function () {questionWrite(questionArray[arrayFinder])}, 2000);
         }
@@ -185,10 +187,10 @@ function answerSelect() {
             setTimeout(function () {endWrite(questionArray[arrayFinder])}, 2000);
         }
     }
-    else if ($(this).attr("value") == "incorrect") {
+    else if ($(this).attr("value") == "incorrect") { // or if you select the wrong answer
         solutionWrite(questionArray[arrayFinder]);
-        $(".question-div").html("Incorrect");
-        incorrect++;
+        $(".question-div").html("Incorrect"); //text is adds and will display incorrect
+        incorrect++; //incorrect column adds a point
         if (arrayFinder < questionArray.length) {
             setTimeout(function() {questionWrite(questionArray[arrayFinder])}, 2000);
         }
@@ -197,7 +199,7 @@ function answerSelect() {
         }
         }
     };
-
+// displays results
     function endWrite () {
         $(".question-div").empty();
         $(".content-div").empty();
@@ -208,7 +210,7 @@ function answerSelect() {
         resetButton.text("Start Over?");
         $(".content-div").append(resetButton);
     }
-
+//restarts game and sends everything back to zero
     function resetClick () {
         arrayFinder = 0;
         incorrect = 0;
