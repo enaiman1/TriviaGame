@@ -107,29 +107,29 @@ function start() {
     $(".content-div").append(startButton); //puts start button
 };
 
-//once button it click, program will start running within 1 second
+//once button it click, program will start running decrease by one second
 function run() {
     intervalId = setInterval(decrement, 1000);
 };
 
-// when question is revealed, timer starts (20 sec)
+// when question is revealed and goes unaswered,
 function decrement() {
     time--;
     $(".timer-div").text("Time Remaining: " + time + " Seconds");
     if (time == 0) { //when time goes to zero
-        if (arrayFinder < questionArray.length - 1) { //take away question from array
+        if (arrayFinder < questionArray.length - 1) { 
             setTimeout(function () { questionWrite(questionArray[arrayFinder])}, 2000);
             solutionWrite(questionArray[arrayFinder]);
-            $(".question-div").html("Incorrect!"); //display incorrect for 2 second 
+            $(".question-div").html("Incorrect!"); 
             stop();
-            unanswered++; // add a point to the unaswered column
+            unanswered++; 
         }
         else if (arrayFinder < questionArray.length) {
             setTimeout(function () {endWrite(questionArray[arrayFinder])}, 2000);
             solutionWrite(questionArray[arrayFinder]);
-            $(".question-div").html("Incorrect!");  //display incorrect
+            $(".question-div").html("Incorrect!");  
             stop();
-            unanswered++; // add a point to the unaswered column
+            unanswered++; 
         }
     };
 };
@@ -141,8 +141,6 @@ function stop() {
 // displays the question
 function questionWrite(obj) {
     time = 20;
-    // $(".timer-div").empty();
-    // $(".timer-div").text("Time Remaining: " + time + " Seconds");
     $(".question-div").empty();
     $(".content-div").empty();
     run();
